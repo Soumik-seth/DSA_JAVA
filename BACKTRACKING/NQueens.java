@@ -1,77 +1,61 @@
-
+package DSA_JAVA.BACKTRACKING;
 
 public class NQueens {
-
     public static void main(String[] args) {
         int n = 4;
-        char[][] board = new char[n][n];
-
-        // initialize board with '.'
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                board[i][j] = '.';
-            }
-        }
-
-        solve(board, 0);
+        boolean board[][] = new boolean[n][n];
+        System.out.println("Total solutions: " + queen(board, 0));
     }
 
-    public static void solve(char[][] board, int row) {
-        int n = board.length;
-
-        // base case: all queens are placed
-        if (row == n) {
-            printBoard(board);
-            System.out.println(); // gap between solutions
-            return;
+    static int queen(boolean board[][], int row) {
+        if (row == board.length) {
+            display(board);
+            return 1;
         }
 
-        // try placing queen in every column of current row
-        for (int col = 0; col < n; col++) {
+        int count = 0;
+        for (int col = 0; col < board.length; col++) {
             if (isSafe(board, row, col)) {
-                board[row][col] = 'Q';     // place queen
-                solve(board, row + 1);     // move to next row
-                board[row][col] = '.';     // backtrack
+                board[row][col] = true;
+                count += queen(board, row + 1);
+                board[row][col] = false;
             }
         }
+        return count;
     }
 
-    public static boolean isSafe(char[][] board, int row, int col) {
-        // check same column upward
+    static boolean isSafe(boolean board[][], int row, int col) {
+
+        // check vertically up
         for (int i = 0; i < row; i++) {
-            if (board[i][col] == 'Q')
-                return false;
+            if (board[i][col]) return false;
         }
 
         // check left diagonal
-        int r = row, c = col;
-        while (r >= 0 && c >= 0) {
-            if (board[r][c] == 'Q')
-                return false;
-            r--;
-            c--;
+        int minLeft = Math.min(row, col);
+        for (int i = 1; i <= minLeft; i++) {
+            if (board[row - i][col - i]) return false;
         }
 
         // check right diagonal
-        r = row; 
-        c = col;
-        while (r >= 0 && c < board.length) {
-            if (board[r][c] == 'Q')
-                return false;
-            r--;
-            c++;
+        int minRight = Math.min(row, board.length - col - 1);
+        for (int i = 1; i <= minRight; i++) {
+            if (board[row - i][col + i]) return false;
         }
 
         return true;
     }
 
-    public static void printBoard(char[][] board) {
-        for (char[] row : board) {
-            for (char c : row) {
-                System.out.print(c + " ");
+    static void display(boolean board[][]) {
+        for (boolean[] row : board) {
+            for (boolean element : row) {
+                if (element)
+                    System.out.print("Q ");
+                else
+                    System.out.print("X ");
             }
             System.out.println();
         }
+        System.out.println();
     }
 }
-
