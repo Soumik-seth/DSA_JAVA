@@ -1,45 +1,34 @@
 package LINKED_LIST;
 
-public class operationtail{
-    // Node class
+public class DoublyLL {
+
     public static class Node {
         int data;
         Node next;
-        
+        Node prev;
+
         public Node(int data) {
             this.data = data;
         }
     }
-    
-    // Head and tail of the linked list
+
     Node head;
     Node tail;
-    
-    // Method to add node at the beginning
+
     void insert(int data) {
         Node newNode = new Node(data);
+
         if (head == null) {
             head = newNode;
             tail = newNode;
             return;
         }
+
         newNode.next = head;
+        head.prev = newNode;
         head = newNode;
     }
-    
-    // Method to add node at the end
-    void insertAtTail(int data) {
-        Node newNode = new Node(data);
-        if (tail == null) {  // List is empty
-            head = newNode;
-            tail = newNode;
-        } else {
-            tail.next = newNode;
-            tail = newNode;
-        } 
-    }
-    
-    // Display method
+
     void display() {
         Node tempNode = head;
         while (tempNode != null) {
@@ -48,17 +37,25 @@ public class operationtail{
         }
         System.out.println("NULL");
     }
-    
+    // prevoius node print karne ke liye
+    void displayReverse() {
+    Node tempNode = tail;
+    System.out.print("NULL");
+    while (tempNode != null) {
+        System.out.print("<-" + tempNode.data);
+        tempNode = tempNode.prev;
+    }
+    System.out.println();
+}
+
     public static void main(String[] args) {
-        operationtail list = new operationtail();
+        DoublyLL list = new DoublyLL();
         list.insert(10);
         list.insert(20);
         list.insert(30);
         list.insert(40);
-        
-        list.display();  // Output: 40->30->20->10->NULL
-        
-        list.insertAtTail(110);
-        list.display();  // Output: 40->30->20->10->110->NULL
+
+        list.display();
+        list.displayReverse();
     }
 }
