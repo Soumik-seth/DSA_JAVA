@@ -1,4 +1,4 @@
-package LINKED_LIST.LeetCode;
+
 public class Findthecyclelength {
 
 
@@ -28,8 +28,8 @@ void insert(int data){
     tail.next = newNode;
     tail = newNode;
 }
-     
-public  boolean len(){
+     // finding the lenght  of cycle of  a linked list 
+public  int len(){
 
     Node fast=head;
         Node slow=head;
@@ -37,10 +37,21 @@ public  boolean len(){
             fast=fast.next.next;
             slow=slow.next;
             if(fast == slow){
-                return true;
+            Node temp =slow;
+            int length=0;
+           do{
+           temp=temp.next;
+        length++;
+           }while(temp != slow);
+   return length;
             }
+
         }
-        return false;}
+        return 0;}
+
+
+
+        
 
 
 
