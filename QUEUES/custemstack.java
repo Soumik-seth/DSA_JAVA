@@ -1,20 +1,24 @@
 package QUEUES;
 
-public class coustemstack {
+public class custemstack {
     private int data[];
     private  static int size=10;
     int ptr=-1;
-    public coustemstack(){
+    public custemstack(){
         this(size);
     }
-    public coustemstack(int size){
+    public custemstack(int size){
         this.data=new int [size];
     }
 
     public boolean push(int item){
         if(isfull()){
-            System.out.println("stack is full");
-            return false;
+      int temp[]=new int[data.length*2];
+      for(int i=0;i<data.length;i++){
+        temp[i]=data[i];
+
+      }
+      data=temp;
         }
         ptr++;
         data[ptr]=item;
@@ -46,10 +50,13 @@ public class coustemstack {
         return ptr==-1;
     }
     public static void main(String[] args) {
-        coustemstack stack=new coustemstack();
+        custemstack stack=new custemstack(5);
         stack.push(10);
         stack.push(20); 
         stack.push(30);
+        stack.push(40);
+        stack.push(50);
+        stack.push(60);
         try {
             System.out.println("->"+stack.peak());
         } catch (Exception e) {
