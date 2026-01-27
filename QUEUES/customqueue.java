@@ -34,7 +34,7 @@ public class customqueue {
             System.out.println("stack is empty");
             return -1;   
         }
-         int removed=data[0];//shifting
+         int removed=data[0];
          for(int i=1;i<end;i++){
             data[i-1]=data[i];
          }
