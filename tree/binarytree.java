@@ -7,6 +7,7 @@ public class binarytree {
         Scanner scanner=new Scanner(System.in);
         binarytree tree=new binarytree();
         tree.populate(scanner);
+        tree.display();
     }
 
 private  static class Node{
@@ -42,4 +43,17 @@ if(leftdata){
         populate(scanner,node.right);
     }
 
-}}
+}
+public void display(){
+    display(root," ");
+
+}
+private void display(Node node,String indent){
+    if(node == null){
+        return;
+    }
+    System.out.println(indent + node.data);
+    display(node.left, indent + "\t");
+    display(node.right, indent + "\t");
+}
+}
