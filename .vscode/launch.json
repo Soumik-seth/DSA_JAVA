@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BSTinst",
+            "request": "launch",
+            "mainClass": "tree.BSTinst",
+            "projectName": "DSA_JAVA_57ffeab3"
+        },
+        {
+            "type": "java",
             "name": "binarytree",
             "request": "launch",
             "mainClass": "ee.binarytree",
